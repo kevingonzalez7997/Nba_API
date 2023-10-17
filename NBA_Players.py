@@ -3,7 +3,6 @@ import csv
 
 url = "https://free-nba.p.rapidapi.com/players"
 querystring = {"per_page":"100"}
-
 headers = {
 	"X-RapidAPI-Key": "4fba45883emshec591bdcb4a73d5p11afadjsn204c3ecd687d",
 	"X-RapidAPI-Host": "free-nba.p.rapidapi.com"
@@ -14,7 +13,7 @@ next_page = True
 page = 0 
 
 while(next_page != None ): 
-    querystring["page"] = str(page)
+    querystring["page"] = (page)
     response = requests.get(url, headers=headers, params=querystring)
     data = response.json()
     next_page = data["meta"]["next_page"]
@@ -26,10 +25,8 @@ while(next_page != None ):
             "position":i["position"],
             "full_name": full_name,
             "team":i["team"]["full_name"]
-
         }) 
     page += 1   
-
 csv_file = "nba_players.csv"
 with open(csv_file, "w", newline="") as file:
     writer = csv.DictWriter(file, fieldnames=["id", "position", "full_name","team"], extrasaction='ignore')
