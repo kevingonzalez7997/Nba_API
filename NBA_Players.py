@@ -1,11 +1,11 @@
 import requests  # Import the requests library to make HTTP requests
 import csv  # Import the CSV library for handling CSV files
 
-url = "https://free-nba.p.rapidapi.com" # The URL of the NBA players API
+url = "https://free-nba.p.rapidapi.com/players" # The URL of the NBA players API
 querystring = {"per_page": "100"}  # Parameters to be sent with the API request
 
 headers = {
-    "X-RapidAPI-Key": "4fba45883emshec591bdcb4a73d5p11afadjsn204c3ecd687d",
+    "X-RapidAPI-Key": "",
     "X-RapidAPI-Host": "free-nba.p.rapidapi.com"
 }
 
@@ -16,7 +16,7 @@ page = 0  # Initialize variable to iterate through pages
 # While there is a next page, the loop will continue
 while next_page is not None:
     querystring["page"] = page # Sets the page number in the querystring parameters
-    response = requests.get(url + "/players", headers=headers, params=querystring)
+    response = requests.get(url , headers=headers, params=querystring)
     data = response.json()  # Create a variable for handling
     next_page = data["meta"]["next_page"]  # "meta" is the second key-value; "next_page" is the condition being checked
 
